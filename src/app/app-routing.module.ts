@@ -1,7 +1,22 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [ ];
+const routes: Routes = [
+  { path: '', redirectTo: 'recipes', pathMatch: 'full' },
+  {
+    path: 'recipes',
+    children: [
+      {
+        path: '',
+        loadChildren: './pages/recipes/recipes.module#RecipesPageModule'
+      },
+      {
+        path: ':recipeId',
+        loadChildren: './pages/recipe/recipe.module#RecipePageModule'
+      }
+    ]
+  }
+];
 
 @NgModule({
   imports: [
@@ -9,4 +24,4 @@ const routes: Routes = [ ];
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
